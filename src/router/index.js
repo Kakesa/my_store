@@ -7,7 +7,7 @@ import MyDashboard from "../views/MyDashboard.vue";
 
 const routes = [
   { path: "/", name: "Home", component: Home },
-  { path: "/register", name: "Register", component: Register },
+  { path: "/signup", name: "Register", component: Register },
   {path: "/login", name: "Login", component: Login},
   {path: "/dashboard", name: "Dashboard", component: Dashboard},
   {path: "/my-dashboard", name: "MyDashboard", component: MyDashboard}
