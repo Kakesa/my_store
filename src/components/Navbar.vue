@@ -1,20 +1,43 @@
 <template>
-  <nav class="navbar p-4 bg-gray-800 text-white flex justify-between">
-    <div>
-      <router-link to="/" class="mr-4">Accueil</router-link>
-      <router-link to="/all-things">Objets disponibles</router-link>
-    </div>
+  <nav class="navbar">
+    <div class="container">
+      <!-- Logo -->
+      <div class="logo">
+        <router-link to="/" class="brand">HK</router-link>
+      </div>
 
-    <div>
-      <template v-if="loggedIn">
-        <router-link v-if="isAdmin" to="/dashboard" class="mr-4">Dashboard Admin</router-link>
-        <router-link v-else to="/my-dashboard" class="mr-4">Mon Dashboard</router-link>
-        <button @click="logout" class="bg-red-500 px-3 py-1 rounded">Logout</button>
-      </template>
-      <template v-else>
-        <router-link to="/login" class="mr-4">Login</router-link>
-        <router-link to="/register">Register</router-link>
-      </template>
+      <!-- Liens centraux -->
+      <div class="nav-links">
+        <router-link to="/" class="navbar-item">ACCUEIL</router-link>
+        <router-link to="/all-things" class="navbar-item">OBJETS DISPONIBLES</router-link>
+      </div>
+
+      <!-- Auth -->
+      <div class="auth-links">
+        <template v-if="loggedIn">
+          <router-link
+            v-if="isAdmin"
+            to="/dashboard"
+            class="navbar-item"
+          >
+            Dashboard Admin
+          </router-link>
+          <router-link
+            v-else
+            to="/my-dashboard"
+            class="navbar-item"
+          >
+            Mon Dashboard
+          </router-link>
+          <button @click="logout" class="logout-button">Déconnexion</button>
+        </template>
+        <template v-else>
+          <router-link to="/login" class="navbar-item">Connexion</router-link>
+          <router-link to="/register" class="navbar-item create-account">
+            Créer un compte
+          </router-link>
+        </template>
+      </div>
     </div>
   </nav>
 </template>
@@ -27,7 +50,7 @@ import { useRouter } from "vue-router";
 const auth = useAuthStore();
 const router = useRouter();
 
-const loggedIn = computed(() => !!auth.token);
+const loggedIn = computed(() => !!auth.user);
 const isAdmin = computed(() => auth.role === "admin");
 
 const logout = () => {
@@ -35,3 +58,7 @@ const logout = () => {
   router.push("/login");
 };
 </script>
+
+<style scoped>
+
+</style>
